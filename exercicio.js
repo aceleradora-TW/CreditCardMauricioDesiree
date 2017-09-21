@@ -1,45 +1,73 @@
+function checkingCard(cartao){
 
+let numero = 0;
+let restoInt = 0;
+let restoSoma = 0;
+let numeroInt = 0;
+let numeroSoma = 0;
 
-function check_card(cartao){
+for (let i=0; i <= cartao.length; i++){
+  let restoContador = i % 2
 
-total1 = "";
-total2 = 0
-numero1 = 0
-total3 = 0
-
-for (let i=0; i <= 18; i++){
-
-if(cartao.charAt(i)!= " "){
-
-  if (i == 0 || i == 2 || i == 5 || i ==7 || i == 10 || i == 12 || i == 15 || i == 17){
-     numero1 = (cartao.charAt(i) * 2).toString()
-     total1 = total1 + numero1
+  if(restoContador == 0){
+    if(cartao.charAt(i) != 0){
+      numero = (cartao.charAt(i) * 2)
+      if (numero > 9){
+        numero = numero - 9
+      }
+      numeroInt = parseInt(numero)
+      numeroSoma = numeroSoma + numeroInt
+    }
    }
-
-  else{
-    numero2 = parseInt (cartao.charAt(i))
-    total2 = total2 + numero2
-
-  }}}
-
-for(j=0;j <= 10;j++){
-  numero3 = parseInt(total1.charAt(j))
-  total3 =  total3 + (numero3)
+   else{
+     restoInt = parseInt(cartao.charAt(i))
+     restoSoma = restoSoma + restoInt
+   }
+}
+if ((restoSoma + numeroSoma) % 10 == 0){
+  console.log(cartao)
+  console.log("Cartão válido\n")
+}
+else {
+  console.log(cartao)
+  console.log("Cartão inválido\n")
+}
 }
 
-  if ((total3 + total2) % 10 == 0){
-    console.log(cartao)
-    console.log(total3+total2)
-    console.log("Cartão válido\n")
+function checkingFlag(cartao){
+
+if(cartao.charAt(0) === "4"){
+  console.log("VISA!")
+  if(cartao.length == 13 || cartao.length == 16){
+    checkingCard(cartao)
   }
-  else {
-    console.log(cartao)
-    console.log(total3+total2)
-    console.log("Cartão inválido\n")
+}
+else if(cartao.charAt(0) === "3"){
+  console.log("AMEX!")
+  if(cartao.length == 15){
+    checkingCard(cartao)
+  }
+}
+else if(cartao.charAt(0) === "6"){
+  console.log("DISCOVER!")
+  if(cartao.length == 16){
+    checkingCard(cartao)
+  }
+}
+else if(cartao.charAt(0) === "5"){
+  console.log("MASTERCARD!")
+  if(cartao.length == 16){
+    checkingCard(cartao)
   }
 }
 
-console.log("\n---- Validar cartao ----\n")
-check_card("4408 0412 3456 7893") //Teste cartao valido
-console.log("------------------------")
-check_card("4417 1234 5678 9112") //Teste cartao invalido
+else{
+  console.log("Cartao invalido!!");
+}
+
+}
+
+checkingFlag("4408041234567893")
+checkingFlag("340440808656642")
+checkingFlag("6114080865664927")
+checkingFlag("5204408086566492")
